@@ -60,11 +60,6 @@
   width: 400px;
   max-width: 95%;
 }
-.container-register{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .input {
   display: flex;
   flex-direction: column;
