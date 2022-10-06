@@ -11,12 +11,7 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAYTtmn0nFZn8fD3_aGPSYFKVYbwF3y3T4",
-  authDomain: "weight-tracker-app-41475.firebaseapp.com",
-  projectId: "weight-tracker-app-41475",
-  storageBucket: "weight-tracker-app-41475.appspot.com",
-  messagingSenderId: "137954969312",
-  appId: "1:137954969312:web:ccad2bfdff55e0abcf7285"
+  
 };
 
 // Initialize Firebase
