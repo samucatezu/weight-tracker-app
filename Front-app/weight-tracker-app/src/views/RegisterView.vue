@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <form @submit.prevent="register">
+    <form  class="container-register" @submit.prevent="register">
       <h2 class="mb-3">Register</h2>
       <div class="input">
         <label for="email">Email address</label>
