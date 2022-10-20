@@ -1,5 +1,64 @@
+
+
+<template>
+	<main>
+
+	<!-- <div>
+    <div class="text-center">You're now logged as</div>
+    <div id="username_display" class="display-6">{{ this.email }}</div>
+    <button id="sign_out" class="mt-4 btn btn-danger" @click="signOut">
+      Logout
+    </button>
+  </div> -->
+
+		<h1>Weight Tracker</h1>
+
+		<div class="current">
+			<span>{{ currentWeight.weight }}</span>
+			<small>Current Weight (kg)</small>
+		</div>
+
+		<form @submit.prevent="addWeight">
+			<input 
+				type="number"
+				step="0.1"
+				v-model="weightInput" />
+
+			<input	
+				type="submit"
+				value="Add weight" />
+		</form>
+
+		<div v-if="weights && weights.length > 0">
+
+			<h2>
+				Last 7 days
+			</h2>
+
+			<div class="canvas-box">
+				<canvas ref="weightChartEl"></canvas>
+			</div>
+
+			<div class="weight-history">
+				<h2>Weight History</h2>
+				<ul>
+					<li v-for="weight in weights">
+						<span>{{ weight.weight }}kg</span>
+						<small>
+							{{ new Date(weight.date).toLocaleDateString() }}
+						</small>
+					</li>
+				</ul>
+			</div>
+
+		</div>
+
+	</main>
+</template>
+
 <script setup>
 import { ref, shallowRef, computed, watch, nextTick } from 'vue'
+// import { getAuth } from "firebase/auth";
 import Chart from 'chart.js/auto'
 
 const weights = ref([])
@@ -9,6 +68,8 @@ const weightChartEl = ref(null)
 const weightChart = shallowRef(null)
 
 const weightInput = ref(0)
+
+// const auth = getAuth();
 
 const currentWeight = computed(() => {
 	return weights.value.sort((a, b) => b.date - a.date)[0] || { weight: 0 }
@@ -20,6 +81,27 @@ const addWeight = () => {
 		date: new Date().getTime()
 	})
 }
+
+
+
+// export default {
+//   data() {
+//     return {
+//       email: auth.currentUser.email,
+//     };
+//   },
+//   methods: {
+//     signOut() {
+//       auth
+//         .signOut()
+//         .then(() => {
+//           console.log("Sign Out completed");
+//           this.$router.push("/");
+//         })
+//         .catch((error) => console.log(error));
+//     },
+//   },
+// };
 
 watch(weights, (newWeights) => {
 	const ws = [...newWeights]
@@ -67,54 +149,6 @@ watch(weights, (newWeights) => {
 	})
 }, { deep: true })
 </script>
-
-<template>
-	<main>
-
-		<h1>Weight Tracker</h1>
-
-		<div class="current">
-			<span>{{ currentWeight.weight }}</span>
-			<small>Current Weight (kg)</small>
-		</div>
-
-		<form @submit.prevent="addWeight">
-			<input 
-				type="number"
-				step="0.1"
-				v-model="weightInput" />
-
-			<input	
-				type="submit"
-				value="Add weight" />
-		</form>
-
-		<div v-if="weights && weights.length > 0">
-
-			<h2>
-				Last 7 days
-			</h2>
-
-			<div class="canvas-box">
-				<canvas ref="weightChartEl"></canvas>
-			</div>
-
-			<div class="weight-history">
-				<h2>Weight History</h2>
-				<ul>
-					<li v-for="weight in weights">
-						<span>{{ weight.weight }}kg</span>
-						<small>
-							{{ new Date(weight.date).toLocaleDateString() }}
-						</small>
-					</li>
-				</ul>
-			</div>
-
-		</div>
-
-	</main>
-</template>
 
 <style>
 * {
