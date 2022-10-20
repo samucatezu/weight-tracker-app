@@ -17,5 +17,5 @@ vue-firebase-auth is a web app that let you
 
 ### Executing program
 
-Visit this [link](https://weight-tracker-app-samucatezu.netlify.app/)
+Visit this [link](weight-tracker-app-49a56.web.app)
 
